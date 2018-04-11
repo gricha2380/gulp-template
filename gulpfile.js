@@ -54,6 +54,7 @@ gulp.task("js",function(){
 	.pipe(map.init())
 	.pipe(concat('scripts.min.js'))
 	.pipe(uglify())
+	.on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
 	.pipe(map.write("/"))
 	.pipe(gulp.dest('output/assets/js'))
 	.pipe(browserSync.stream())
@@ -105,7 +106,7 @@ gulp.task("watch", function(){
 // verify values in .bash_profile
 var user = process.env.FTP_USER;
 var password = process.env.FTP_PWD;
-var host = '173.201.63.1';
+var host = process.env.FTP_IP;
 var port = 21;
 var localFilesGlob = ['css/*','js/*','img/*','*.html'];//['./**/*'];
 var remoteFolder = '/folder'
